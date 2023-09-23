@@ -9,8 +9,8 @@ namespace Calculator
     public enum TokenType
     {
         Number,
-        Add,
-        Subtract,
+        Plus,
+        Minus,
         Multiply,
         Divide,
         LeftBracket,

@@ -16,5 +16,18 @@ namespace Calculator
             Type = type;
             Value = value;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return
+                obj is Token token &&
+                Type == token.Type &&
+                Value == token.Value;
+        }
+
+        public override string ToString()
+        {
+            return $"{Type}: {Value}";
+        }
     }
 }

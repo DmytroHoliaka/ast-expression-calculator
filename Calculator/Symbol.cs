@@ -17,6 +17,7 @@ namespace Calculator
 
         public const char Point = '.';
         public const char Space = ' ';
+        public const char Start = 'S';
         public const char EOF = '\0';
     }
 }

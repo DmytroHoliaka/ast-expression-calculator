@@ -15,6 +15,7 @@ namespace Calculator
         Divide,
         LeftBracket,
         RightBracket,
-        EOF,
+        Start,
+        EOF
     }
 }

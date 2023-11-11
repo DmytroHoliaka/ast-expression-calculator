@@ -19,8 +19,15 @@ namespace Calculator
 
         public double Eval()
         {
-            // ToDo: Add check dividing to 0
-            return LeftNode.Eval() / RightNode.Eval();
+            double leftValue = LeftNode.Eval();
+            double rightValue = RightNode.Eval();
+
+            if (rightValue == 0)
+            {
+                throw new DivideByZeroException("Cannot divide by zero");
+            }
+
+            return leftValue / rightValue;
         }
     }
 }

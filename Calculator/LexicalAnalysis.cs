@@ -8,8 +8,6 @@ namespace Calculator
 {
     public class LexicalAnalysis
     {
-        // ToDo: Analize also negative numbers
-
         public string Expression { get; init; }
 
         private char _currChar;
@@ -72,9 +70,6 @@ namespace Calculator
                         }
 
                         GoToNextChar();
-
-                        // ToDo: Maybe make check that after this Minus approach EOF
-
                         tokens.Add(new Token(TokenType.Plus, null));
                         break;
 
@@ -168,7 +163,6 @@ namespace Calculator
             }
         }
 
-
         private double GetNextNumber()
         {
             List<char> stopSignal = new()
@@ -176,7 +170,9 @@ namespace Calculator
                 Symbol.EOF,
                 Symbol.Point,
                 Symbol.Multiply,
-                Symbol.Divide
+                Symbol.Divide,
+                Symbol.LeftBracket,
+                Symbol.RightBracket
             };
             
             StringBuilder strNum = new();

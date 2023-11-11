@@ -9,79 +9,112 @@ namespace Calculator
 {
     public class Parser
     {
-        private List<TokenType> _termItems = new() { TokenType.Plus, TokenType.Minus };
-        private List<TokenType> _factorItems = new() { TokenType.Multiply, TokenType.Divide };
+        private readonly List<TokenType> _termItems = new() { TokenType.Plus, TokenType.Minus };
+        private readonly List<TokenType> _factorItems = new() { TokenType.Multiply, TokenType.Divide };
         private readonly List<Token> _tokens;
         private int _currPos;
         private Token _currToken;
 
 
-        public Parser(List<Token> tokens)
+        public Parser(List<Token>? tokens)
         {
             if (!Validator.IsTokensValid(tokens))
             {
                 throw new ArgumentException("Incorrect set of tokens", nameof(tokens));
             }
 
-            _tokens = tokens;
+            _tokens = tokens!;
             _currPos = 2;
-            _currToken = _tokens[1];
+            _currToken = _tokens![1];
         }
 
         public double GetValue()
         {
-            // ToDo: Add null check
-            IAbstractSyntaxTree ast = ParseExpression();
+            IAbstractSyntaxTree? ast = ParseExpression();
+
+            if (ast is null)
+            {
+                throw new ArgumentNullException("Abstract syntax tree null", nameof(ast));
+            }
+            else if (_currToken.Type != TokenType.EOF)
+            {
+                throw new FormatException("Incorrect order of tokens in expression");
+            }
+
             return ast.Eval();
         }
 
-        private IAbstractSyntaxTree ParseExpression()
+        private IAbstractSyntaxTree? ParseExpression()
         {
-            IAbstractSyntaxTree result = Factor();
+            IAbstractSyntaxTree? result = Factor();
 
             while (_currToken.Type != TokenType.EOF && result != null && _termItems.Contains(_currToken.Type))
             {
                 if (_currToken.Type == TokenType.Plus)
                 {
                     GetNextToken();
-                    IAbstractSyntaxTree rigthNode = Factor();
-                    result = new PlusNode(result, rigthNode);
+                    IAbstractSyntaxTree? rightNode = Factor();
+
+                    if (rightNode is null)
+                    {
+                        throw new ArgumentNullException("The result of the calculation is undefined", nameof(rightNode));
+                    }
+
+                    result = new PlusNode(result, rightNode);
                 }
                 else if (_currToken.Type == TokenType.Minus)
                 {
                     GetNextToken();
-                    IAbstractSyntaxTree rigthNode = Factor();
-                    result = new MinusNode(result, rigthNode);
+                    IAbstractSyntaxTree? rightNode = Factor();
+
+                    if (rightNode is null)
+                    {
+                        throw new ArgumentNullException("The result of the calculation is undefined", nameof(rightNode));
+                    }
+
+                    result = new MinusNode(result, rightNode);
                 }
             }
 
             return result;
         }
 
-        private IAbstractSyntaxTree Factor()
+        private IAbstractSyntaxTree? Factor()
         {
-            IAbstractSyntaxTree factor = Term();
+            IAbstractSyntaxTree? factor = Term();
 
             while (_currToken.Type != TokenType.EOF && factor != null && _factorItems.Contains(_currToken.Type))
             {
                 if (_currToken.Type == TokenType.Multiply)
                 {
                     GetNextToken();
-                    IAbstractSyntaxTree rigthNode = Term();
-                    factor = new MultiplyNode(factor, rigthNode);
+                    IAbstractSyntaxTree? rightNode = Term();
+
+                    if (rightNode is null)
+                    {
+                        throw new ArgumentNullException("The result of the calculation is undefined", nameof(rightNode));
+                    }
+
+                    factor = new MultiplyNode(factor, rightNode);
                 }
                 else if (_currToken.Type == TokenType.Divide)
                 {
                     GetNextToken();
-                    IAbstractSyntaxTree rigthNode = Term();
-                    factor = new DivideNode(factor, rigthNode);
+                    IAbstractSyntaxTree? rightNode = Term();
+
+                    if (rightNode is null)
+                    {
+                        throw new ArgumentNullException("The result of the calculation is undefined", nameof(rightNode));
+                    }
+
+                    factor = new DivideNode(factor, rightNode);
                 }
             }
 
             return factor;
         }
 
-        private IAbstractSyntaxTree Term()
+        private IAbstractSyntaxTree? Term()
         {
             IAbstractSyntaxTree? term = null;
 
@@ -97,8 +130,11 @@ namespace Calculator
             }
             else if (_currToken.Type == TokenType.Number)
             {
-                // ToDo: Add null check
                 term = new LeafNode(_currToken.Value!.Value);
+            }
+            else
+            {
+                throw new FormatException("Incorrect order of tokens");
             }
 
             GetNextToken();

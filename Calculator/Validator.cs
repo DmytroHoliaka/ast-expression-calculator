@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calculator
+﻿namespace Calculator
 {
     public class Validator
     {
-        public static bool IsTokensValid(List<Token> tokens)
+        public static bool IsTokensValid(List<Token>? tokens)
         {
-            if (IsCorrectEdges(tokens) == false ||
+            if (tokens is null ||
+                IsCorrectEdges(tokens) == false ||
                 IsCorrectBrackets(tokens) == false ||
                 IsCorrectOperations(tokens) == false)
             {

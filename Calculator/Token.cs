@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calculator
+﻿namespace Calculator
 {
     public class Token
     {
@@ -17,6 +11,11 @@ namespace Calculator
             Value = value;
         }
 
+        public override string ToString()
+        {
+            return $"{Type}: {Value}";
+        }
+
         public override bool Equals(object? obj)
         {
             return
@@ -25,9 +24,9 @@ namespace Calculator
                 Value == token.Value;
         }
 
-        public override string ToString()
+        public override int GetHashCode()
         {
-            return $"{Type}: {Value}";
+            return HashCode.Combine(Type, Value);
         }
     }
 }

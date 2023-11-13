@@ -2,35 +2,55 @@
 {
     public class Program
     {
-        // ToDo: Change "private set" properties to "init"
+        // ToDo: Change name of commit "034b37e" -> "Add symbol «Start»"
+
         public static void Main(string[] args)
         {
             try
             {
-                //string expression = "1+2*3-(4/5*6+7)-8*9-";
-                string expression = "1-*/*2";
+               Settings settings = new(args);
 
-                LexicalAnalysis lexer = new(expression);
-                List<Token> tokens = lexer.GetTokens();
+                if (settings.IsUploaded == true)
+                {
+                    FileManager file = new(settings.Record, settings.OutputFilePath);
+                    file.EvalFileExpressions();
+                }
+                else if (settings.IsEvaled == true)
+                {
+                    LexicalAnalysis lexer = new(settings.Record);
+                    List<Token> tokens = lexer.GetTokens();
 
-                Parser parser = new(tokens);
-                Console.WriteLine(parser.GetValue());
+                    Parser parser = new(tokens);
+                    Console.WriteLine(parser.GetValue());
+                }
+                else
+                {
+                    Console.WriteLine("System error. Try again.");
+                }
             }
             catch (ArgumentNullException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"[ArgumentNullException] {ex.Message}.");
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"[ArgumentOutOfRangeException] {ex.Message}.");
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"[ArgumentException] {ex.Message}.");
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine($"[DivideByZeroException] {ex.Message}.");
             }
             catch (FormatException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"[FormatException] {ex.Message}.");
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"[IOException] {ex.Message}.");
             }
         }
     }

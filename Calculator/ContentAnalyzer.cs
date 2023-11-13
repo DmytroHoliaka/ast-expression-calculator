@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Calculator
 {
@@ -47,12 +42,12 @@ namespace Calculator
             {
                 throw new ArgumentException("An unclear combination of arguments", nameof(args));
             }
-            else if ((match = Regex.Match(settings.Record!, RegexPatterns.ExpressionPattern)).Success &&
+            else if ((Regex.IsMatch(settings.Record!, RegexPatterns.ExpressionPattern)) == true &&
                       settings.IsEvaled == false)
             {
                 throw new ArgumentException("Incorrect combination of arguments", nameof(args));
             }
-            else if ((match = Regex.Match(settings.Record!, RegexPatterns.FilePathPattern)).Success &&
+            else if ((Regex.IsMatch(settings.Record!, RegexPatterns.FilePathPattern)) == true &&
                       settings.IsUploaded == false)
             {
                 throw new ArgumentException("Incorrect combination of arguments", nameof(args));

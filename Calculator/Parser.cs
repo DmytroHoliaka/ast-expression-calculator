@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calculator
+﻿namespace Calculator
 {
     public class Parser
     {
@@ -116,7 +109,7 @@ namespace Calculator
 
         private IAbstractSyntaxTree? Term()
         {
-            IAbstractSyntaxTree? term = null;
+            IAbstractSyntaxTree? term;
 
             if (_currToken.Type == TokenType.LeftBracket)
             {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Calculator
 {
@@ -26,7 +21,7 @@ namespace Calculator
 
             if (IsUploaded == true)
             {
-                string outputFileName = $"output({DateTime.Now.ToString("HH-mm-ss")}).txt";
+                string outputFileName = $"output({DateTime.Now:HH-mm-ss}).txt";
 
                 Match match = Regex.Match(Record!, RegexPatterns.FilePathPattern);
                 string foldersPath = match.Groups[1].Value;

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Calculator
+namespace Calculator.Services
 {
     public class Settings
     {

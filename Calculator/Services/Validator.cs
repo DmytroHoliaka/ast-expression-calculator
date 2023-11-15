@@ -1,4 +1,6 @@
-﻿namespace Calculator
+﻿using Calculator.TokenManagement;
+
+namespace Calculator.Services
 {
     public class Validator
     {

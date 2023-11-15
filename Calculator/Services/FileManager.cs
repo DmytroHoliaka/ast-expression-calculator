@@ -1,4 +1,7 @@
-﻿namespace Calculator
+﻿using Calculator.AST;
+using Calculator.TokenManagement;
+
+namespace Calculator.Services
 {
     public class FileManager
     {

@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.Services
 {
     public static class Symbol
     {

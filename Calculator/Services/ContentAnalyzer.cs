@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Calculator
+namespace Calculator.Services
 {
     public class ContentAnalyzer
     {
@@ -42,12 +42,12 @@ namespace Calculator
             {
                 throw new ArgumentException("An unclear combination of arguments", nameof(args));
             }
-            else if ((Regex.IsMatch(settings.Record!, RegexPatterns.ExpressionPattern)) == true &&
+            else if (Regex.IsMatch(settings.Record!, RegexPatterns.ExpressionPattern) == true &&
                       settings.IsEvaled == false)
             {
                 throw new ArgumentException("Incorrect combination of arguments", nameof(args));
             }
-            else if ((Regex.IsMatch(settings.Record!, RegexPatterns.FilePathPattern)) == true &&
+            else if (Regex.IsMatch(settings.Record!, RegexPatterns.FilePathPattern) == true &&
                       settings.IsUploaded == false)
             {
                 throw new ArgumentException("Incorrect combination of arguments", nameof(args));

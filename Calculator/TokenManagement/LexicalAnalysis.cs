@@ -1,6 +1,7 @@
 ﻿using System.Text;
+using Calculator.Services;
 
-namespace Calculator
+namespace Calculator.TokenManagement
 {
     public class LexicalAnalysis
     {
@@ -24,7 +25,7 @@ namespace Calculator
             Expression = new string(inputExpression!.Where(ch => ch != Symbol.Space).ToArray());
             _currIndex = 0;
             _currChar = Expression[0];
-        }   
+        }
 
         public List<Token> GetTokens()
         {
@@ -32,7 +33,7 @@ namespace Calculator
 
             while (_currChar != Symbol.EOF)
             {
-                if (Char.IsDigit(_currChar) || _currChar == Symbol.Point)
+                if (char.IsDigit(_currChar) || _currChar == Symbol.Point)
                 {
                     double number = GetNextNumber();
                     tokens.Add(new Token(TokenType.Number, number));
@@ -170,14 +171,14 @@ namespace Calculator
                 Symbol.LeftBracket,
                 Symbol.RightBracket
             };
-            
+
             StringBuilder strNum = new();
 
             int minusCount = 0;
             bool isNegative = false;
             bool isPositive = false;
 
-            while (Char.IsDigit(_currChar) == false && 
+            while (char.IsDigit(_currChar) == false &&
                    stopSignal.Contains(_currChar) == false)
             {
                 if (_currChar == Symbol.Minus)
@@ -198,7 +199,7 @@ namespace Calculator
                 throw new FormatException("Incorrect recording of plus and minus");
             }
 
-            while (Char.IsDigit(_currChar) || _currChar == Symbol.Point)
+            while (char.IsDigit(_currChar) || _currChar == Symbol.Point)
             {
                 strNum.Append(_currChar);
                 GoToNextChar();
@@ -208,13 +209,13 @@ namespace Calculator
             {
                 throw new FormatException("Incorrect tokens");
             }
-            
+
             if (!double.TryParse(strNum.ToString(), out double number))
             {
                 throw new FormatException("Incorrect number format");
             }
 
-            return (minusCount % 2 == 1) ? -number : number;
+            return minusCount % 2 == 1 ? -number : number;
         }
     }
 }

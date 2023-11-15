@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.TokenManagement
 {
     public enum TokenType
     {

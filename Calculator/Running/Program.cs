@@ -1,9 +1,9 @@
-﻿namespace Calculator
+﻿using Calculator.Services;
+
+namespace Calculator.Running
 {
     public class Program
     {
-        // ToDo: Change name of commit "034b37e" -> "Add symbol «Start»"
-
         public static void Main(string[] args)
         {
             try

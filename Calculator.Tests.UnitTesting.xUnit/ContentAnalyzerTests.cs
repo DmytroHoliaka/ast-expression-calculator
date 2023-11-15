@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
+using Calculator.Services;
 using Xunit;
-using static Calculator.Tests.UnitTesting.xUnit.ContentAnalyzerTests;
 
 namespace Calculator.Tests.UnitTesting.xUnit
 {
@@ -79,7 +79,7 @@ namespace Calculator.Tests.UnitTesting.xUnit
             {
                 Settings settings = new("1+2", "-e");
 
-                AppSettingsContext record1 = new(new string[0], settings);
+                AppSettingsContext record1 = new(Array.Empty<string>(), settings);
                 AppSettingsContext record2 = new(new string[1], settings);
                 AppSettingsContext record3 = new(new string[3], settings);
                 AppSettingsContext record4 = new(new string[2] { "-u", "-i" }, settings);

@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using Calculator.Running;
+using Calculator.Services;
+using Xunit;
 
 namespace Calculator.Tests.UnitTesting.xUnit
 {

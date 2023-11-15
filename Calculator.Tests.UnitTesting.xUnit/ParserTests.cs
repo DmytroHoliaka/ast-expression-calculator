@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using Calculator.AST;
+using Calculator.TokenManagement;
+using Xunit;
 
 namespace Calculator
 {

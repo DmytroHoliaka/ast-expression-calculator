@@ -29,5 +29,18 @@ namespace Calculator
                 OutputFilePath = foldersPath + outputFileName;
             }
         }
+
+        public Settings(Settings? origin)
+        {
+            if (origin is null)
+            {
+                throw new ArgumentNullException(nameof(origin), "Origin settings cannot be null in copy ctor");
+            }
+
+            Record = origin.Record;
+            OutputFilePath = origin.OutputFilePath;
+            IsUploaded = origin.IsUploaded;
+            IsEvaled = origin.IsEvaled;
+        }
     }
 }

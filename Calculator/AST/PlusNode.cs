@@ -1,11 +1,11 @@
-﻿namespace Calculator
+﻿namespace Calculator.AST
 {
-    public class MinusNode : IAbstractSyntaxTree
+    public class PlusNode : IAbstractSyntaxTree
     {
         public IAbstractSyntaxTree LeftNode { get; init; }
         public IAbstractSyntaxTree RightNode { get; init; }
 
-        public MinusNode(IAbstractSyntaxTree? leftNode, IAbstractSyntaxTree? rightNode)
+        public PlusNode(IAbstractSyntaxTree? leftNode, IAbstractSyntaxTree? rightNode)
         {
             if (leftNode is null)
             {
@@ -23,7 +23,7 @@
 
         public double Eval()
         {
-            return LeftNode.Eval() - RightNode.Eval();
+            return LeftNode.Eval() + RightNode.Eval();
         }
     }
 }

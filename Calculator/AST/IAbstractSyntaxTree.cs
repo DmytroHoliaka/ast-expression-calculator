@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.AST
 {
     public interface IAbstractSyntaxTree
     {

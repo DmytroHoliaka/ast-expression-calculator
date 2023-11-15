@@ -1,4 +1,7 @@
-﻿namespace Calculator
+﻿using Calculator.Services;
+using Calculator.TokenManagement;
+
+namespace Calculator.AST
 {
     public class Parser
     {

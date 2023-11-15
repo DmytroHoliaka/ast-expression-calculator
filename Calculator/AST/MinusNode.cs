@@ -1,11 +1,11 @@
-﻿namespace Calculator
+﻿namespace Calculator.AST
 {
-    public class DivideNode : IAbstractSyntaxTree
+    public class MinusNode : IAbstractSyntaxTree
     {
         public IAbstractSyntaxTree LeftNode { get; init; }
         public IAbstractSyntaxTree RightNode { get; init; }
 
-        public DivideNode(IAbstractSyntaxTree? leftNode, IAbstractSyntaxTree? rightNode)
+        public MinusNode(IAbstractSyntaxTree? leftNode, IAbstractSyntaxTree? rightNode)
         {
             if (leftNode is null)
             {
@@ -23,15 +23,7 @@
 
         public double Eval()
         {
-            double leftValue = LeftNode.Eval();
-            double rightValue = RightNode.Eval();
-
-            if (rightValue == 0)
-            {
-                throw new DivideByZeroException("Cannot divide by zero");
-            }
-
-            return leftValue / rightValue;
+            return LeftNode.Eval() - RightNode.Eval();
         }
     }
 }

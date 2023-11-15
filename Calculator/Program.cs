@@ -8,25 +8,9 @@
         {
             try
             {
-               Settings settings = new(args);
-
-                if (settings.IsUploaded == true)
-                {
-                    FileManager file = new(settings.Record, settings.OutputFilePath);
-                    file.EvalFileExpressions();
-                }
-                else if (settings.IsEvaled == true)
-                {
-                    LexicalAnalysis lexer = new(settings.Record);
-                    List<Token> tokens = lexer.GetTokens();
-
-                    Parser parser = new(tokens);
-                    Console.WriteLine(parser.GetValue());
-                }
-                else
-                {
-                    Console.WriteLine("System error. Try again.");
-                }
+                Settings settings = new(args);
+                Launch launch = new(settings);
+                launch.Execute();
             }
             catch (ArgumentNullException ex)
             {
@@ -51,6 +35,10 @@
             catch (IOException ex)
             {
                 Console.WriteLine($"[IOException] {ex.Message}.");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"[InvalidOperationException] {ex.Message}.");
             }
         }
     }
